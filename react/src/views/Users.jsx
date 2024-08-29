@@ -7,13 +7,27 @@ import { useStateContext } from "../context/ContextProvider.jsx";
 export default function Users() {
 
     const [users, setUsers] = useState([]);
+
     const [loading, setLoading] = useState(false);
+
     const { setNotification } = useStateContext()
 
     useEffect(() => {
         getUsers();
 
     }, [])
+
+
+    const onDeleteClick = user => {
+        if (!window.confirm("Are you sure you want to delete this user?")) {
+            return
+        }
+        axiosClient.delete(`/users/${user.id}`)
+            .then(() => {
+                setNotification('User was successfully deleted')
+                getUsers()
+            })
+    }
 
     const getUsers = () => {
         setLoading(true)
@@ -56,9 +70,10 @@ export default function Users() {
                     }
                     {!loading &&
                         <tbody>
-                            {users.map(u => (
+                            {users.map((u, index) => (
                                 <tr key={u.id}>
-                                    <td>{u.id}</td>
+                                    <td>{index + 1}</td>
+                                    {/* <td>{u.id}</td> */}
                                     <td>{u.name}</td>
                                     <td>{u.email}</td>
                                     <td>{u.created_at}</td>
@@ -72,6 +87,7 @@ export default function Users() {
                         </tbody>
                     }
                 </table>
+
             </div>
         </div>
     )

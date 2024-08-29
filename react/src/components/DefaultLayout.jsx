@@ -32,7 +32,7 @@ export default function DefaultLayout() {
             <div className="content">
                 <header>
                     <div>
-                        Header
+                        Data Management System
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', padding: 0 }}>
                         <span > {user.name}</span>

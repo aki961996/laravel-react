@@ -260,13 +260,14 @@ table>tbody>tr>td {
 
 /* logout btn */
 .btn-logout {
-  color: #000000;
+  color: #f4ecf5;
   text-decoration: none;
+  background-color: #0999b3;
 
 }
 
 .btn-logout:hover {
-  background-color: #0999b3;
+  background-color: #d61818;
   color: #FFF;
 
 }
