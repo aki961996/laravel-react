@@ -41,7 +41,6 @@ export default function Users() {
                 setLoading(false)
             })
     }
-
     return (
         <div>
             <div style={{ display: 'flex', justifyContent: "space-between", alignItems: "center" }}>
@@ -59,6 +58,7 @@ export default function Users() {
                             <th>Actions</th>
                         </tr>
                     </thead>
+
                     {loading &&
                         <tbody>
                             <tr>
@@ -68,6 +68,7 @@ export default function Users() {
                             </tr>
                         </tbody>
                     }
+
                     {!loading &&
                         <tbody>
                             {users.map((u, index) => (
@@ -78,16 +79,16 @@ export default function Users() {
                                     <td>{u.email}</td>
                                     <td>{u.created_at}</td>
                                     <td>
-                                        <Link className="btn-edit" to={'/users/' + u.id}>Edit</Link>
-                                        &nbsp;
-                                        <button className="btn-delete" onClick={ev => onDeleteClick(u)}>Delete</button>
+                                        <Link className="btn-edit" to={`/users/${u.id}`}>Edit</Link>
+                                        <button className="btn-delete" onClick={() => onDeleteClick(u)}>Delete</button>
                                     </td>
                                 </tr>
+
                             ))}
+
                         </tbody>
                     }
                 </table>
-
             </div>
         </div>
     )

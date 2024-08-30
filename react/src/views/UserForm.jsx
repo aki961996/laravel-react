@@ -23,7 +23,7 @@ export default function UserForm() {
             axiosClient.get(`/users/${id}`)
                 .then(({ data }) => {
                     setLoading(false)
-                    setUser(data)
+                    setUser(data.data);
                 })
                 .catch(() => {
                     setLoading(false)
@@ -31,7 +31,10 @@ export default function UserForm() {
         }, [])
     }
 
+
     const onSubmit = ev => {
+        console.log('form submit');
+
         ev.preventDefault()
         if (user.id) {
             axiosClient.put(`/users/${user.id}`, user)
@@ -62,8 +65,8 @@ export default function UserForm() {
 
     return (
         <>
-            {user.id && <h1>Update User: {user.name}</h1>}
-            {!user.id && <h1>New User</h1>}
+            {user.id ? <h1>Update User: {user.name}</h1> : <h1>New User</h1>}
+            {/* {!user.id && <h1>New User</h1>} */}
             <div className="card animated fadeInDown">
                 {loading && (
                     <div className="text-center">
@@ -83,7 +86,9 @@ export default function UserForm() {
                         <input value={user.email} onChange={ev => setUser({ ...user, email: ev.target.value })} placeholder="Email" />
                         <input type="password" onChange={ev => setUser({ ...user, password: ev.target.value })} placeholder="Password" />
                         <input type="password" onChange={ev => setUser({ ...user, password_confirmation: ev.target.value })} placeholder="Password Confirmation" />
-                        <button className="btn">Save</button>
+                        <button className="btn">
+                            {user.id ? "Update" : "null"}
+                        </button>
                     </form>
                 )}
             </div>

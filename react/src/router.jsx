@@ -29,9 +29,7 @@ const router = createBrowserRouter([
                 path: '/users',
                 element: <Users />
             },
-
-
-
+            //we are using one componernt like two method so write key
             {
                 path: '/users/new',
                 element: <UserForm key="userCreate" />
