@@ -10,12 +10,24 @@ export default function Users() {
 
     const [loading, setLoading] = useState(false);
 
-    const { setNotification } = useStateContext()
+    const { setNotification } = useStateContext();
+
+    const [page, setPage] = useState(1); // Initialize page state
+    const [pagination, setPagination] = useState({
+        current_page: 1,
+        per_page: 10,
+        total: 0,
+        total_pages: 0,
+    });
+
+    // useEffect(() => {
+    //     getUsers();
+
+    // }, [])
 
     useEffect(() => {
-        getUsers();
-
-    }, [])
+        getUsers(page); // Fetch users when component mounts or page changes
+    }, [page]);
 
 
     const onDeleteClick = user => {
@@ -29,18 +41,30 @@ export default function Users() {
             })
     }
 
-    const getUsers = () => {
+
+
+    const getUsers = (pageNumber = 1) => {
         setLoading(true)
-        axiosClient.get('/users')
+        axiosClient.get(`/users?page=${pageNumber}`)
             .then(({ data }) => {
                 setLoading(false)
                 // console.log(data, 'user data');
                 setUsers(data.data)
+
+                setPagination({
+                    current_page: data.meta.current_page,
+                    per_page: data.meta.per_page,
+                    total: data.meta.total,
+                    total_pages: data.meta.last_page,
+                });
+                setPage(pageNumber); // Update the current page
             })
             .catch(() => {
                 setLoading(false)
             })
     }
+
+
     return (
         <div>
             <div style={{ display: 'flex', justifyContent: "space-between", alignItems: "center" }}>
@@ -89,6 +113,16 @@ export default function Users() {
                         </tbody>
                     }
                 </table>
+
+
+                {/* Pagination Controls */}
+                {!loading &&
+                    <div className="pagination-controls">
+                        <button onClick={() => getUsers(page - 1)} disabled={page === 1}>Previous</button>
+                        <span>Page {pagination.current_page} of {pagination.total_pages}</span>
+                        <button onClick={() => getUsers(page + 1)} disabled={page === pagination.total_pages}>Next</button>
+                    </div>
+                }
             </div>
         </div>
     )
