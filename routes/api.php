@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\DashbordConroller;
 use App\Http\Controllers\Api\UserController;
+
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Route;
@@ -27,7 +29,11 @@ Route::middleware('auth:sanctum')->group(function () {
         return $request->user();
     });
 
-   Route::apiResource('/users', UserController::class);
+    //users
+    Route::apiResource('/users', UserController::class);
+
+    //dashboard
+    Route::get('/dashboard', [DashbordConroller::class, 'index']);
 });
 
 Route::post('/signup', [AuthController::class, 'signUp']);

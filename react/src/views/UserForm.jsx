@@ -33,8 +33,6 @@ export default function UserForm() {
 
 
     const onSubmit = ev => {
-        console.log('form submit');
-
         ev.preventDefault()
         if (user.id) {
             axiosClient.put(`/users/${user.id}`, user)
@@ -87,7 +85,7 @@ export default function UserForm() {
                         <input type="password" onChange={ev => setUser({ ...user, password: ev.target.value })} placeholder="Password" />
                         <input type="password" onChange={ev => setUser({ ...user, password_confirmation: ev.target.value })} placeholder="Password Confirmation" />
                         <button className="btn">
-                            {user.id ? "Update" : "null"}
+                            {user.id ? "Update" : "Save"}
                         </button>
                     </form>
                 )}
