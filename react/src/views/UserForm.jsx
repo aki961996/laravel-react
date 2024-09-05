@@ -72,7 +72,7 @@ export default function UserForm() {
                     </div>
                 )}
                 {errors &&
-                    <div className="alert">
+                    <div className="custom-alert alert-danger">
                         {Object.keys(errors).map(key => (
                             <p key={key}>{errors[key][0]}</p>
                         ))}

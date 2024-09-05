@@ -306,3 +306,52 @@ table>tbody>tr>td {
   margin: 10px 0;
   font-size: 16px;
 }
+
+
+
+/* alerts */
+
+/* Custom Alert Styles */
+.custom-alert {
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #f8d7da;
+  /* Light red background */
+  color: #721c24;
+  /* Dark red text */
+  border: 1px solid #f5c6cb;
+  /* Border for the alert */
+  margin: 10px 0;
+  position: relative;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Alert message paragraphs */
+.alert-message {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Adding a fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Dismiss Button (Optional) */
+.custom-alert::after {
+  content: '✖';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #721c24;
+  font-weight: bold;
+}
