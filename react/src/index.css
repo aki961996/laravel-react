@@ -271,3 +271,38 @@ table>tbody>tr>td {
   color: #FFF;
 
 }
+
+
+/* button */
+
+.btn-primary {
+  background-color: rgb(216, 162, 13);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.custom-class {
+  font-size: 10px;
+}
+
+.another-class {
+  font-weight: bold;
+}
+
+/* view
+ */
+
+.user-details {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  max-width: 400px;
+  margin: auto;
+}
+
+.user-details p {
+  margin: 10px 0;
+  font-size: 16px;
+}

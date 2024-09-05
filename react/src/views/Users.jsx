@@ -103,7 +103,8 @@ export default function Users() {
                                     <td>{u.email}</td>
                                     <td>{u.created_at}</td>
                                     <td>
-                                        <Link className="btn-edit" to={`/users/${u.id}`}>Edit</Link>
+                                        <Link className="btn-primary custom-class another-class" to={`/users/view/${u.id}`}>View</Link>
+                                        <Link className="btn-edit " to={`/users/${u.id}`}>Edit</Link>
                                         <button className="btn-delete" onClick={() => onDeleteClick(u)}>Delete</button>
                                     </td>
                                 </tr>

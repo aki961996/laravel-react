@@ -31,7 +31,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     //users
     Route::apiResource('/users', UserController::class);
-
     //dashboard
     Route::get('/dashboard', [DashbordConroller::class, 'index']);
 });
