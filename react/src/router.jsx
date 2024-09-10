@@ -9,6 +9,7 @@ import Dashboard from './views/Dashboard';
 import NotFound from './views/NotFound';
 import UserForm from './views/UserForm';
 import UserView from './views/UserView';
+import Blogs from './views/Blogs';
 
 const router = createBrowserRouter([
 
@@ -30,6 +31,11 @@ const router = createBrowserRouter([
                 path: '/users',
                 element: <Users />
             },
+            {
+                path: '/blogs',
+                element: <Blogs/>
+            },
+
             //we are using one componernt like two method so write key
             {
                 path: '/users/new',

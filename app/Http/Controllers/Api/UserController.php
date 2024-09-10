@@ -15,8 +15,18 @@ class UserController extends Controller
      */
     public function index()
     {
+        // return UserResource::collection(
+        //     User::query()->orderBy('id', 'desc')->paginate(10)
+        // );
+
         return UserResource::collection(
-            User::query()->orderBy('id', 'desc')->paginate(10)
+            User::query()
+                ->when(request('search'), function ($query, $search) {
+                    $query->where('name', 'like', '%' . $search . '%');
+                    // ->orWhere('email', 'like', '%' . $search . '%'); // Adjust the fields you want to search
+                })
+                ->orderBy('id', 'desc')
+                ->paginate(10)
         );
     }
 

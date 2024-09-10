@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useStateContext } from "../context/ContextProvider.jsx";
 
 export default function Users() {
+    const [query, setQuery] = useState('');  // To store the search input
 
     const [users, setUsers] = useState([]);
 
@@ -41,15 +42,41 @@ export default function Users() {
             })
     }
 
+    // const getUsers = (pageNumber = 1) => {
+    //     setLoading(true)
+    //     axiosClient.get(`/users?page=${pageNumber}`)
+    //         .then(({ data }) => {
+    //             setLoading(false)
+    //             // console.log(data, 'user data');
+    //             setUsers(data.data)
 
+    //             setPagination({
+    //                 current_page: data.meta.current_page,
+    //                 per_page: data.meta.per_page,
+    //                 total: data.meta.total,
+    //                 total_pages: data.meta.last_page,
+    //             });
+    //             setPage(pageNumber); // Update the current page
+    //         })
+    //         .catch(() => {
+    //             setLoading(false)
+    //         })
+    // }
 
     const getUsers = (pageNumber = 1) => {
-        setLoading(true)
-        axiosClient.get(`/users?page=${pageNumber}`)
+        setLoading(true);
+
+        // Pass the search query along with the page number in the API request
+        axiosClient.get(`/users`, {
+            params: {
+                page: pageNumber,
+                search: query,  // Add the search query here
+            }
+        })
             .then(({ data }) => {
-                setLoading(false)
-                // console.log(data, 'user data');
-                setUsers(data.data)
+                setLoading(false);
+
+                setUsers(data.data); // Set the user data
 
                 setPagination({
                     current_page: data.meta.current_page,
@@ -60,13 +87,39 @@ export default function Users() {
                 setPage(pageNumber); // Update the current page
             })
             .catch(() => {
-                setLoading(false)
-            })
-    }
+                setLoading(false);
+            });
+    };
+
+
+    // Function to handle form submission
+    const handleSearchSubmit = (e) => {
+        e.preventDefault();
+        getUsers();
+
+    };
 
 
     return (
+
         <div>
+            <form onSubmit={handleSearchSubmit}>
+                {/* Text Input */}
+                <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+                    <div style={{ width: '45%', marginRight: '20px' }}>
+
+                        <input
+                            type="text"
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
+                            placeholder="Enter your name"
+                        />
+                    </div>
+                    <button className="btn-add" type="submit">Search</button>
+                </div>
+
+            </form>
+
             <div style={{ display: 'flex', justifyContent: "space-between", alignItems: "center" }}>
                 <h1>Users</h1>
                 <Link className="btn-add" to="/users/new">Add new</Link>
